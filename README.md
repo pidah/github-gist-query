@@ -28,7 +28,10 @@ Enter your github username and click submit. All the public gists for that usern
 
 Next go to github gists and create a new github `public` gist.
 
-Within 10 seconds, you should receive a desktop message notifying you that a new github public gist is available. You can refresh the application page in the browser if it is still open, or re-submit the query.
+Within 10 seconds, you should receive a desktop message notifying you that a new github public gist is available like the following:
+![Alt text](notification.png?raw=true "desktop notification")
+
+You can refresh the application page in the browser if it is still open, or re-submit the query.
 
 ### API client
 
