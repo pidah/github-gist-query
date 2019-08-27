@@ -1,5 +1,6 @@
 package main
 
+
 import (
 	"bytes"
 	"encoding/json"
@@ -10,7 +11,7 @@ import (
 )
 
 type gist_json struct {
-	User string
+	User string `json:"user"`
 }
 
 func RootHandler(w http.ResponseWriter, r *http.Request) {
@@ -45,39 +46,32 @@ func QueryHandler(w http.ResponseWriter, r *http.Request) {
 	if _, exists := GlobalStore[user]; !exists {
 		GlobalStore[user] = g.Counter
 	}
-
-	if err != nil {
-		log.Printf(err.Error())
-	}
-
 }
 
-func JsonHandler(w http.ResponseWriter, r *http.Request) {
+func ApiHandler(w http.ResponseWriter, r *http.Request) {
 
-	accept := r.Header.Get("Accept")
+	decoder := json.NewDecoder(r.Body)
 
-	switch accept {
+	var request gist_json
 
-	case "application/json":
+	err := decoder.Decode(&request)
 
-		decoder := json.NewDecoder(r.Body)
+	g, err := GetGist(request.User)
 
-		var request gist_json
+	if err != nil {
+		log.Printf("GetGistError: %s, %v",
+			err.Error(), http.StatusInternalServerError)
 
-		err := decoder.Decode(&request)
-
-		g, err := GetGist(request.User)
-
-		if err != nil {
-			log.Printf("GetGistError: %s, %v",
-				err.Error(), http.StatusInternalServerError)
-
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		jsonData, _ := json.Marshal(g)
-
-		fmt.Fprint(w, bytes.NewBuffer(jsonData))
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	if _, exists := GlobalStore[request.User]; !exists {
+		GlobalStore[request.User] = g.Counter
+	}
+
+	jsonData, _ := json.Marshal(g.Gist)
+
+	fmt.Fprint(w, bytes.NewBuffer(jsonData))
+	return
 }

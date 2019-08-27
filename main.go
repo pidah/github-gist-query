@@ -30,7 +30,7 @@ func main() {
 
 	router.HandleFunc("/query", QueryHandler)
 
-	router.HandleFunc("/json", JsonHandler).Methods("POST")
+	router.HandleFunc("/api", ApiHandler).Methods("POST")
 
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
