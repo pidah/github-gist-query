@@ -42,7 +42,7 @@ func QueryHandler(w http.ResponseWriter, r *http.Request) {
 
 	t.Execute(w, g)
 
-	if _, ok := GlobalStore[user]; !ok {
+	if _, exists := GlobalStore[user]; !exists {
 		GlobalStore[user] = g.Counter
 	}
 
