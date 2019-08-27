@@ -22,7 +22,9 @@ There are 3 ways to query this application to retrieve the public gists of a use
 
 Go to a broswer window and enter the url `http://localhost:8080`
 
-Enter your github username and click submit. All the public gists for that username would be returned.
+Enter your github username and click submit. All the public gists for that username would be returned as shown here:
+
+![Alt text](query.png?raw=true "public gists results")
 
 Next go to github gists and create a new github `public` gist.
 
