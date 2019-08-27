@@ -5,10 +5,10 @@ This application queries the Github API and retrieves the public gists for a par
 At the root of this directory there are binaries included for windows, linux and OSX Operating Systems.
 
 The following example runs the application on OSX:
-`
+```
 ./github-gist-query-osx
 2019/08/27 12:58:14 Started Github Public Gist Query Application on port [:8080]
-`
+```
 
 
 ## How to query public gists of a github user:
@@ -31,7 +31,7 @@ Within 10 seconds, you should receive a desktop message notifying you that a new
 ## API client
 
 The application exposes a simple API endpoint `http://localhost:8080/api` that a http API client can query to retrieve the public gists for a particular user. The following example uses curl to query the API:
-`
+```
 curl -X POST -H "Content-Type: application/json" --silent  -d '{"user":"pidah"}' http://localhost:8080/api  | jq
 [
   "https://gist.githubusercontent.com/pidah/a8f672883901768e2cc06ddd6b0e0348/raw/9a2c7732fab5bcd73ea3ed52d2d9599a4cc47666/test.json",
@@ -54,7 +54,7 @@ curl -X POST -H "Content-Type: application/json" --silent  -d '{"user":"pidah"}'
   "https://gist.githubusercontent.com/pidah/10369211/raw/cc95bf377a3ad942501f0c1770df8addc60dab44/gistfile1.txt",
   "https://gist.githubusercontent.com/pidah/5974672/raw/709d7624dfa4fcffcec86f52d61a49ed36428ea8/multi_aws_region_vagrantfile"
 ]
-`
+```
 
 
 
