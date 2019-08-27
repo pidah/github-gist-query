@@ -91,7 +91,7 @@ Again if you create a new public gist for the user, within 10 seconds you will r
 2019/08/27 13:28:36 New Public gist found for pidah !
 ```
 
-##Design Considerations
+## Design Considerations
 
 As the requirement was only to retreive the public gists for a particular github user, this implementation does not support authentication against the github API with personal tokens or Basic Auth.
 
