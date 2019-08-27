@@ -14,9 +14,9 @@ The following example runs the application on OSX:
 ## How to query public gists of a github user:
 There are 3 ways to query this application to retrieve the public gists of a user namely:
 
-Via a browser
-Via an API client
-Via the command line
+- Via a browser
+- Via an API client
+- Via the command line
 
 ### browser
 
@@ -93,13 +93,13 @@ Again if you create a new public gist for the user, within 10 seconds you will r
 
 ## Design Considerations
 
-As the requirement was only to retreive the public gists for a particular github user, this implementation does not support authentication against the github API with personal tokens or Basic Auth.
+- As the requirement was only to retreive the public gists for a particular github user, this implementation does not support authentication against the github API with personal tokens or Basic Auth.
 
-This implementation polls the github API every 10 seconds to check for new Public gists for a previously queried github username. A better approach would be to use a Github webhook to trigger a http POST request to the application when a new public gist is detected. Unfortunately Github Gists API do not support Webhooks like Github Repositories API.
+- This implementation polls the github API every 10 seconds to check for new Public gists for a previously queried github username. A better approach would be to use a Github webhook to trigger a http POST request to the application when a new public gist is detected. Unfortunately Github Gists API do not support Webhooks like Github Repositories API.
 
-For each user queried, an entry is made into a map (dictionary) object in memory, mapping the username to the number of publicly available gists for the user. Every 10 seconds, a new query is made to the github API to retrieve an updated public gist count for that user. If the new count value is greater than the existing value, a desktop notification is triggered. However, if the application is shutdown, all counts for previously queried users are lost, i.e the stored results are not persisted.
+- For each user queried, an entry is made into a map (dictionary) object in memory, mapping the username to the number of publicly available gists for the user. Every 10 seconds, a new query is made to the github API to retrieve an updated public gist count for that user. If the new count value is greater than the existing value, a desktop notification is triggered. However, if the application is shutdown, all counts for previously queried users are lost, i.e the stored results are not persisted.
 
-The desktop notification feature works across various platforms, but was only tested on Mac OSX 10.13.6. Notifications can easily be extended to include other targets e.g slack, email, prometheus etc. 
+- The desktop notification feature works across various platforms, but was only tested on Mac OSX 10.13.6. Notifications can easily be extended to include other targets e.g slack, email, prometheus etc. 
 
  
 
